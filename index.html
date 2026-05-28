@@ -13,61 +13,6 @@
 
   <style>
 
-/* Árbol izquierdo */
-
-.tree-left{
-
-  position:fixed;
-
-  left:0;
-  bottom:0;
-
-  height:110vh;
-  width:auto;
-
-  z-index:-1;
-
-  opacity:0.95;
-
-  pointer-events:none;
-
-}
-
-/* Árbol derecho */
-
-.tree-right{
-
-  position:fixed;
-
-  right:0;
-  bottom:0;
-
-  height:110vh;
-  width:auto;
-
-  z-index:-1;
-
-  opacity:0.95;
-
-  pointer-events:none;
-
-}
-
-/* Responsive celular */
-
-@media(max-width:768px){
-
-  .tree-left,
-  .tree-right{
-
-    height:310vh;
-
-    opacity:0.75;
-
-  }
-
-}
-
     *{
       margin:0;
       padding:0;
@@ -308,45 +253,50 @@
 
     /* Responsive */
 
-    @media(max-width:768px){
+   @media(max-width:768px){
 
-      h1{
-        font-size:3rem;
-      }
+  h1{
 
-      .phrase{
-        font-size:1.15rem;
-      }
+    font-size:2.2rem;
 
-      .card{
-        padding:40px 20px;
-      }
+    line-height:1.05;
 
-      .time-box{
-        width:75px;
-        height:75px;
-      }
+    padding:0 10px;
 
-      .time-box span{
-        font-size:1.5rem;
-      }
+    max-width:100%;
 
-      .main-btn{
-        width:100%;
-        max-width:280px;
-      }
+    word-break:break-word;
 
-    }
+  }
+
+  .phrase{
+    font-size:1.05rem;
+    line-height:1.5;
+  }
+
+  .card{
+    padding:35px 18px;
+  }
+
+  .time-box{
+    width:70px;
+    height:70px;
+  }
+
+  .time-box span{
+    font-size:1.35rem;
+  }
+
+  .main-btn{
+    width:100%;
+    max-width:280px;
+  }
+
+}
 
   </style>
 </head>
 <body>
-
-<!-- Árboles laterales -->
-
-<img src="img/tree-left.png" class="tree-left">
-
-<img src="img/tree-right.png" class="tree-right">
 
   <div class="overlay"></div>
 
