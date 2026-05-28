@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Carta Para Mi Princesita</title>
+
+  <!-- Tipografías -->
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Great+Vibes&display=swap" rel="stylesheet">
+
+  <style>
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+    }
+
+    html{
+      scroll-behavior:smooth;
+    }
+
+    body{
+
+      background:
+      linear-gradient(rgba(15,10,12,0.88), rgba(25,18,22,0.94)),
+      url('https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?q=80&w=1400&auto=format&fit=crop');
+
+      background-size:cover;
+      background-position:center;
+      background-attachment:fixed;
+
+      font-family:'Cormorant Garamond', serif;
+
+      color:#f5e7da;
+
+      overflow-x:hidden;
+      min-height:100vh;
+      position:relative;
+
+      padding:40px 20px 120px;
+
+    }
+
+    /* Overlay */
+
+    .overlay{
+
+      position:fixed;
+      inset:0;
+
+      background:rgba(0,0,0,0.2);
+
+      backdrop-filter:blur(3px);
+
+      z-index:-1;
+
+    }
+
+    /* Partículas doradas */
+
+    .spark{
+
+      position:fixed;
+
+      width:4px;
+      height:4px;
+
+      background:#f0d36f;
+
+      border-radius:50%;
+
+      opacity:0.7;
+
+      animation:float linear infinite;
+
+      z-index:0;
+
+    }
+
+    @keyframes float{
+
+      to{
+        transform:translateY(110vh) translateX(40px);
+      }
+
+    }
+
+    /* Pantalla bloqueada */
+
+    .locked-screen{
+
+      position:fixed;
+      inset:0;
+
+      background:
+      linear-gradient(rgba(12,8,10,0.96), rgba(20,15,18,0.98));
+
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      flex-direction:column;
+
+      z-index:999;
+
+      text-align:center;
+
+      padding:20px;
+
+    }
+
+    .lock-seal{
+
+      width:130px;
+      height:130px;
+
+      border-radius:50%;
+
+      background:linear-gradient(145deg,#d4af37,#f0d36f);
+
+      display:flex;
+      justify-content:center;
+      align-items:center;
+
+      font-size:3rem;
+
+      color:white;
+
+      box-shadow:
+      0 0 25px rgba(212,175,55,0.45),
+      0 0 50px rgba(212,175,55,0.2);
+
+      margin-bottom:30px;
+
+      animation:pulse 2.5s infinite;
+
+    }
+
+    @keyframes pulse{
+
+      0%,100%{
+        transform:scale(1);
+      }
+
+      50%{
+        transform:scale(1.05);
+      }
+
+    }
+
+    .locked-title{
+
+      font-family:'Great Vibes', cursive;
+
+      font-size:4rem;
+
+      color:#f0d6ae;
+
+      margin-bottom:20px;
+
+    }
+
+    .locked-text{
+
+      font-size:1.3rem;
+
+      line-height:1.8;
+
+      max-width:700px;
+
+      color:#f5e7da;
+
+      margin-bottom:30px;
+
+    }
+
+    .countdown{
+
+      font-size:2rem;
+
+      color:#f0d36f;
+
+      letter-spacing:2px;
+
+    }
+
+    /* Contenido */
+
+    .container{
+
+      width:100%;
+      max-width:950px;
+
+      margin:auto;
+
+      position:relative;
+      z-index:2;
+
+      display:none;
+
+      animation:appear 2s ease;
+
+    }
+
+    @keyframes appear{
+
+      from{
+        opacity:0;
+        transform:translateY(30px);
+      }
+
+      to{
+        opacity:1;
+        transform:translateY(0);
+      }
+
+    }
+
+    /* Carta */
+
+    .letter-card{
+
+      background:rgba(35,25,30,0.78);
+
+      border-radius:40px;
+
+      padding:50px 28px;
+
+      border:1px solid rgba(212,175,55,0.25);
+
+      box-shadow:
+      0 10px 35px rgba(0,0,0,0.35),
+      inset 0 0 25px rgba(255,255,255,0.04);
+
+      backdrop-filter:blur(10px);
+
+      overflow:hidden;
+
+      position:relative;
+
+      text-align:center;
+
+    }
+
+    .top-text{
+
+      letter-spacing:3px;
+
+      color:#d8b98d;
+
+      margin-bottom:15px;
+
+      font-size:1rem;
+
+    }
+
+    h1{
+
+      font-family:'Great Vibes', cursive;
+
+      font-size:5rem;
+
+      color:#f2d7b2;
+
+      line-height:1.2;
+
+      margin-bottom:20px;
+
+    }
+
+    .gold-line{
+
+      width:180px;
+      height:2px;
+
+      background:linear-gradient(to right, transparent, #d4af37, transparent);
+
+      margin:30px auto;
+
+    }
+
+    .intro{
+
+      font-size:1.45rem;
+
+      line-height:1.9;
+
+      color:#f3e3d5;
+
+      margin-bottom:45px;
+
+      font-style:italic;
+
+    }
+
+    /* Foto */
+
+    .photo-frame{
+
+      width:100%;
+      max-width:540px;
+
+      height:680px;
+
+      margin:auto;
+
+      border-radius:35px;
+
+      overflow:hidden;
+
+      border:10px solid rgba(255,255,255,0.12);
+
+      box-shadow:
+      0 10px 30px rgba(0,0,0,0.35),
+      0 0 25px rgba(212,175,55,0.12);
+
+      margin-bottom:50px;
+
+    }
+
+    .photo-frame img{
+
+      width:100%;
+      height:100%;
+
+      object-fit:cover;
+
+      transition:0.6s ease;
+
+    }
+
+    .photo-frame:hover img{
+      transform:scale(1.05);
+    }
+
+    /* Carta */
+
+    .letter{
+
+      background:rgba(255,255,255,0.05);
+
+      border:1px solid rgba(212,175,55,0.18);
+
+      padding:40px;
+
+      border-radius:35px;
+
+      text-align:left;
+
+      line-height:2.2;
+
+      font-size:1.35rem;
+
+      color:#f6e8da;
+
+      position:relative;
+
+      overflow:hidden;
+
+    }
+
+    .letter::before{
+
+      content:'❀';
+
+      position:absolute;
+
+      top:10px;
+      right:20px;
+
+      font-size:2rem;
+
+      color:rgba(212,175,55,0.3);
+
+    }
+
+    /* Revelación */
+
+    .reveal{
+
+      opacity:0;
+
+      transform:translateY(40px);
+
+      transition:1.5s ease;
+
+    }
+
+    .reveal.active{
+
+      opacity:1;
+
+      transform:translateY(0);
+
+    }
+
+    /* Firma */
+
+    .signature{
+
+      margin-top:40px;
+
+      text-align:right;
+
+      font-family:'Great Vibes', cursive;
+
+      font-size:2.8rem;
+
+      color:#f0d6ae;
+
+    }
+
+    /* Frase final */
+
+    .final-message{
+
+      text-align:center;
+
+      margin-top:70px;
+
+      font-family:'Great Vibes', cursive;
+
+      font-size:3rem;
+
+      color:#f2d7b2;
+
+      line-height:1.6;
+
+    }
+
+    /* Fin */
+
+    .ending{
+
+      margin-top:80px;
+
+      text-align:center;
+
+      font-size:1.5rem;
+
+      color:#e9cfaa;
+
+      opacity:0;
+
+      animation:endingAppear 3s ease forwards;
+      animation-delay:4s;
+
+    }
+
+    @keyframes endingAppear{
+
+      to{
+        opacity:1;
+      }
+
+    }
+
+    /* Navegación */
+
+    .nav{
+
+      margin-top:55px;
+
+      display:flex;
+      justify-content:center;
+
+    }
+
+    .nav-btn{
+
+      text-decoration:none;
+
+      background:linear-gradient(145deg,#d4af37,#e8c86c);
+
+      color:white;
+
+      padding:16px 34px;
+
+      border-radius:50px;
+
+      font-size:1.05rem;
+
+      transition:0.4s ease;
+
+      box-shadow:0 8px 20px rgba(212,175,55,0.25);
+
+    }
+
+    .nav-btn:hover{
+      transform:translateY(-3px);
+    }
+
+    /* Música */
+
+    .music-player{
+
+      position:fixed;
+
+      bottom:20px;
+      right:20px;
+
+      z-index:20;
+
+    }
+
+    .music-btn{
+
+      border:none;
+
+      width:65px;
+      height:65px;
+
+      border-radius:50%;
+
+      cursor:pointer;
+
+      font-size:1.4rem;
+
+      background:rgba(255,255,255,0.08);
+
+      color:white;
+
+      backdrop-filter:blur(10px);
+
+      box-shadow:0 5px 20px rgba(0,0,0,0.3);
+
+      transition:0.4s;
+
+    }
+
+    .music-btn:hover{
+      transform:scale(1.1);
+    }
+
+    /* Responsive */
+
+    @media(max-width:768px){
+
+      h1{
+        font-size:3.4rem;
+      }
+
+      .locked-title{
+        font-size:3rem;
+      }
+
+      .intro{
+        font-size:1.15rem;
+      }
+
+      .photo-frame{
+        height:500px;
+      }
+
+      .letter{
+        font-size:1.1rem;
+        line-height:1.95;
+      }
+
+      .final-message{
+        font-size:2.3rem;
+      }
+
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="overlay"></div>
+
+  <!-- Pantalla bloqueada -->
+
+  <div class="locked-screen" id="lockedScreen">
+
+    <div class="lock-seal">
+      💌
+    </div>
+
+    <h1 class="locked-title">
+      Carta Final
+    </h1>
+
+    <p class="locked-text">
+      Esta última carta fue escrita con todo mi corazón para ti,
+      mi princesita bella...<br><br>
+
+      Solo podrá abrirse el día más importante de todos.
+    </p>
+
+    <div class="countdown" id="countdown">
+      Cargando...
+    </div>
+
+  </div>
+
+  <!-- Música -->
+
+  <audio id="bgMusic" loop>
+    <source src="music/finalsong.mp3" type="audio/mp3">
+  </audio>
+
+  <div class="music-player">
+    <button class="music-btn" onclick="toggleMusic()">🎻</button>
+  </div>
+
+  <!-- Contenido -->
+
+  <div class="container" id="mainContent">
+
+    <div class="letter-card">
+
+      <p class="top-text">
+        LA ÚLTIMA CARTA
+      </p>
+
+      <h1>
+        Para Mi Princesita Bella
+      </h1>
+
+      <div class="gold-line"></div>
+
+      <p class="intro reveal">
+        Mi amada es mía y yo soy suyo cantares 2:16.”
+      </p>
+
+      <!-- Foto -->
+
+      <div class="photo-frame reveal">
+        <img src="img/final.jpg" alt="">
+      </div>
+
+      <!-- Carta -->
+
+      <div class="letter reveal">
+
+        Mi Princesita...<br><br>
+
+        Hoy no es un día cualquiera, hoy es un día muy especial porque cumple años mi bebita hermosa 
+        hoy es el dia en el que Dios creo a la mujer mas hermosa del universo a su hija favorita 
+        asi que preparé para ti toda esta semana tuya junto con esta pagina aun que me pregunto 
+        y honestamente no sé si alguna página pueda explicar todo lo que siento por ti.<br><br>
+
+        Desde que llegaste a mi vida,
+        algo cambió dentro de mí.<br><br>
+
+        Empecé a encontrar felicidad en ti y en Dios,
+        empecé a sonreír más,
+        empecé a sentir tranquilidad simplemente por saber que existes.<br><br>
+
+        Tú te convertiste en una parte demasiado importante para mí.<br><br>
+
+        Amo cada detalle tuyo,
+        incluso esos pequeños detalles que quizá tú ni siquiera notas.<br><br>
+
+        Amo cómo me haces sentir,
+        amo tu sonrisa,
+        amo escuchar tu voz,
+        amo poder compartir momentos contigo
+        amo tus ojitos
+        amo tu carita hermosa
+        amo todo de ti.<br><br>
+
+        Ya llegamos la final de la pagina mi vida, y
+        quiero que recuerdes algo muy importante:<br><br>
+
+        Las muchas aguas no podran apagar este amor ni lo ahogaran los rios cantares 8:7.<br><br>
+
+        Esto apenas es una pequeña muestra de todo lo que siento por ti,
+        mi princesita bella.<br><br>
+
+        Gracias por existir.<br><br>
+
+        Gracias por llegar a mi vida.<br><br>
+
+        Gracias por permitirme amarte.<br><br>
+        
+        Gracias por amarme como lo haces.<br><br>
+
+        Quiero seguir creando muchísimos más recuerdos contigo,
+        muchísimas más sonrisas,
+        muchísimos más momentos hermosos a tu lado.<br><br>
+
+        Y no importa cuánto tiempo pase,
+        quiero que siempre recuerdes esto:<br><br>
+
+        eres el regalito mas hermoso que Dios me ha podido dar,
+        quiero pasar el resto de mis días contigo, llenos de bendiciones y felicidad.<br><br>
+
+        Feliz cumpleaños, mi princesita, mi muñequita, mi bebita, mi niña bella preciosa
+        que cumplas mil años mas y Dios te siga bendiciendo y haciendo muy feliz 
+        y sigas siendo la mujer virtuosa de Dios. 💌
+
+        <div class="signature">
+          Siempre contigo Te amo✨
+        </div>
+
+      </div>
+
+      <!-- Final -->
+
+      <div class="final-message reveal">
+
+        Hallé luego a la que ama mi alma, y no la deje ir cantares 3:4<br>
+
+      </div>
+
+      <div class="ending">
+        Con amor de tu bebito ✨
+      </div>
+
+      <!-- Navegación -->
+
+      <div class="nav">
+
+        <a href="index.html" class="nav-btn">
+          Volver al inicio 💌
+        </a>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <script>
+
+    // Música
+
+    const music = document.getElementById('bgMusic');
+
+    let playing = false;
+
+    function toggleMusic(){
+
+      if(!playing){
+
+        music.play();
+        playing = true;
+
+      }else{
+
+        music.pause();
+        playing = false;
+
+      }
+
+    }
+
+    // Partículas doradas
+
+    function createSpark(){
+
+      const spark = document.createElement('div');
+
+      spark.classList.add('spark');
+
+      spark.style.left = Math.random() * window.innerWidth + 'px';
+
+      spark.style.top = '-10px';
+
+      spark.style.animationDuration = (10 + Math.random() * 10) + 's';
+
+      spark.style.opacity = Math.random();
+
+      document.body.appendChild(spark);
+
+      setTimeout(() => {
+        spark.remove();
+      },20000);
+
+    }
+
+    setInterval(createSpark, 500);
+
+    // Revelación al hacer scroll
+
+    const reveals = document.querySelectorAll('.reveal');
+
+    function revealOnScroll(){
+
+      reveals.forEach(el => {
+
+        const windowHeight = window.innerHeight;
+
+        const revealTop = el.getBoundingClientRect().top;
+
+        if(revealTop < windowHeight - 100){
+          el.classList.add('active');
+        }
+
+      });
+
+    }
+
+    window.addEventListener('scroll', revealOnScroll);
+
+    revealOnScroll();
+
+    // Desbloqueo carta
+
+    const unlockDate = new Date("June 3, 2026 00:00:00").getTime();
+
+    const countdown = document.getElementById('countdown');
+
+    const lockedScreen = document.getElementById('lockedScreen');
+
+    const mainContent = document.getElementById('mainContent');
+
+    const timer = setInterval(() => {
+
+      const now = new Date().getTime();
+
+      const distance = unlockDate - now;
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      countdown.innerHTML =
+      `${days}d ${hours}h ${minutes}m ${seconds}s`;
+
+      if(distance < 0){
+
+        clearInterval(timer);
+
+        lockedScreen.style.display = "none";
+
+        mainContent.style.display = "block";
+
+      }
+
+    },1000);
+
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>El Regalo de Mi Princesita</title>
+
+  <!-- Tipografías -->
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Great+Vibes&display=swap" rel="stylesheet">
+
+  <style>
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+    }
+
+    body{
+
+      background:
+      linear-gradient(rgba(20,15,18,0.82), rgba(28,20,24,0.9)),
+      url('https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?q=80&w=1200&auto=format&fit=crop');
+
+      background-size:cover;
+      background-position:center;
+      background-attachment:fixed;
+
+      font-family:'Cormorant Garamond', serif;
+
+      color:#f7eadf;
+
+      overflow-x:hidden;
+      min-height:100vh;
+      position:relative;
+
+      padding:40px 20px 120px;
+
+    }
+
+    /* Overlay */
+
+    .overlay{
+
+      position:fixed;
+      inset:0;
+
+      background:rgba(0,0,0,0.18);
+
+      backdrop-filter:blur(3px);
+
+      z-index:-1;
+
+    }
+
+    /* Partículas doradas */
+
+    .spark{
+
+      position:fixed;
+
+      width:4px;
+      height:4px;
+
+      background:#f0d36f;
+
+      border-radius:50%;
+
+      opacity:0.7;
+
+      animation:float linear infinite;
+
+      z-index:0;
+
+    }
+
+    @keyframes float{
+
+      to{
+        transform:translateY(110vh) translateX(40px);
+      }
+
+    }
+
+    /* Intro */
+
+    .intro-screen{
+
+      position:fixed;
+      inset:0;
+
+      background:
+      linear-gradient(rgba(15,10,12,0.95), rgba(25,18,22,0.98));
+
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      flex-direction:column;
+
+      z-index:100;
+
+      animation:fadeOut 2s ease forwards;
+      animation-delay:4s;
+
+    }
+
+    @keyframes fadeOut{
+
+      to{
+        opacity:0;
+        visibility:hidden;
+      }
+
+    }
+
+    .seal{
+
+      width:130px;
+      height:130px;
+
+      border-radius:50%;
+
+      background:linear-gradient(145deg,#d4af37,#f4d77d);
+
+      display:flex;
+      justify-content:center;
+      align-items:center;
+
+      color:white;
+
+      font-size:3rem;
+
+      box-shadow:
+      0 0 25px rgba(212,175,55,0.4),
+      0 0 50px rgba(212,175,55,0.25);
+
+      animation:pulse 2.5s infinite;
+
+      margin-bottom:30px;
+
+    }
+
+    @keyframes pulse{
+
+      0%,100%{
+        transform:scale(1);
+      }
+
+      50%{
+        transform:scale(1.08);
+      }
+
+    }
+
+    .opening-text{
+
+      text-align:center;
+
+      font-size:1.5rem;
+
+      line-height:1.7;
+
+      color:#f1dcc8;
+
+      max-width:700px;
+
+      padding:0 20px;
+
+    }
+
+    /* Contenido */
+
+    .container{
+
+      width:100%;
+      max-width:900px;
+
+      margin:auto;
+
+      position:relative;
+      z-index:2;
+
+      animation:appear 2s ease;
+
+    }
+
+    @keyframes appear{
+
+      from{
+        opacity:0;
+        transform:translateY(30px);
+      }
+
+      to{
+        opacity:1;
+        transform:translateY(0);
+      }
+
+    }
+
+    /* Tarjeta */
+
+    .letter-card{
+
+      background:rgba(35,25,30,0.78);
+
+      border-radius:35px;
+
+      padding:45px 25px;
+
+      border:1px solid rgba(212,175,55,0.25);
+
+      box-shadow:
+      0 10px 35px rgba(0,0,0,0.35),
+      inset 0 0 25px rgba(255,255,255,0.04);
+
+      overflow:hidden;
+
+      text-align:center;
+
+      backdrop-filter:blur(10px);
+
+      position:relative;
+
+    }
+
+    /* Decoración */
+
+    .gold-line{
+
+      width:150px;
+      height:2px;
+
+      background:linear-gradient(to right, transparent, #d4af37, transparent);
+
+      margin:25px auto;
+
+    }
+
+    .top-text{
+
+      letter-spacing:3px;
+
+      color:#d8b98d;
+
+      margin-bottom:15px;
+
+      font-size:1rem;
+
+    }
+
+    h1{
+
+      font-family:'Great Vibes', cursive;
+
+      font-size:4.5rem;
+
+      color:#f2d7b2;
+
+      margin-bottom:25px;
+
+      line-height:1.2;
+
+    }
+
+    .opening-phrase{
+
+      font-size:1.45rem;
+
+      line-height:1.8;
+
+      color:#f1e2d3;
+
+      margin-bottom:35px;
+
+      font-style:italic;
+
+    }
+
+    /* Foto */
+
+    .photo-frame{
+
+      width:100%;
+      max-width:520px;
+
+      height:650px;
+
+      margin:auto;
+
+      border-radius:35px;
+
+      overflow:hidden;
+
+      border:10px solid rgba(255,255,255,0.12);
+
+      box-shadow:
+      0 10px 30px rgba(0,0,0,0.35),
+      0 0 25px rgba(212,175,55,0.15);
+
+      margin-bottom:40px;
+
+    }
+
+    .photo-frame img{
+
+      width:100%;
+      height:100%;
+
+      object-fit:cover;
+
+      transition:0.6s ease;
+
+    }
+
+    .photo-frame:hover img{
+      transform:scale(1.05);
+    }
+
+    /* Música */
+
+    .music-section{
+
+      margin-bottom:40px;
+
+    }
+
+    .music-title{
+
+      font-family:'Great Vibes', cursive;
+
+      font-size:2.3rem;
+
+      color:#f0d6ae;
+
+      margin-bottom:20px;
+
+    }
+
+    .music-box{
+
+      background:rgba(255,255,255,0.06);
+
+      border:1px solid rgba(212,175,55,0.2);
+
+      border-radius:25px;
+
+      padding:20px;
+
+      backdrop-filter:blur(8px);
+
+    }
+
+    audio{
+      width:100%;
+    }
+
+    /* Carta */
+
+    .letter{
+
+      background:rgba(255,255,255,0.06);
+
+      border:1px solid rgba(212,175,55,0.18);
+
+      padding:35px;
+
+      border-radius:30px;
+
+      text-align:left;
+
+      line-height:2.1;
+
+      font-size:1.3rem;
+
+      color:#f6e8da;
+
+      position:relative;
+
+      overflow:hidden;
+
+    }
+
+    .letter::before{
+
+      content:'❀';
+
+      position:absolute;
+
+      top:10px;
+      right:20px;
+
+      font-size:2rem;
+
+      color:rgba(212,175,55,0.3);
+
+    }
+
+    .signature{
+
+      margin-top:35px;
+
+      text-align:right;
+
+      font-family:'Great Vibes', cursive;
+
+      font-size:2.6rem;
+
+      color:#f0d6ae;
+
+    }
+
+    /* Navegación */
+
+    .nav{
+
+      margin-top:45px;
+
+      display:flex;
+      justify-content:center;
+      gap:20px;
+      flex-wrap:wrap;
+
+    }
+
+    .nav-btn{
+
+      text-decoration:none;
+
+      background:linear-gradient(145deg,#d4af37,#e8c86c);
+
+      color:white;
+
+      padding:15px 30px;
+
+      border-radius:50px;
+
+      font-size:1.05rem;
+
+      transition:0.4s ease;
+
+      box-shadow:0 8px 20px rgba(212,175,55,0.25);
+
+    }
+
+    .nav-btn:hover{
+      transform:translateY(-3px);
+    }
+
+    /* Botón música */
+
+    .music-player{
+
+      position:fixed;
+
+      bottom:20px;
+      right:20px;
+
+      z-index:20;
+
+    }
+
+    .music-btn{
+
+      border:none;
+
+      width:65px;
+      height:65px;
+
+      border-radius:50%;
+
+      cursor:pointer;
+
+      font-size:1.4rem;
+
+      background:rgba(255,255,255,0.08);
+
+      color:white;
+
+      backdrop-filter:blur(10px);
+
+      box-shadow:0 5px 20px rgba(0,0,0,0.3);
+
+      transition:0.4s;
+
+    }
+
+    .music-btn:hover{
+      transform:scale(1.1);
+    }
+
+    /* Responsive */
+
+    @media(max-width:768px){
+
+      h1{
+        font-size:3.2rem;
+      }
+
+      .opening-phrase{
+        font-size:1.15rem;
+      }
+
+      .photo-frame{
+        height:480px;
+      }
+
+      .letter{
+        font-size:1.1rem;
+        line-height:1.9;
+      }
+
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="overlay"></div>
+
+  <!-- Intro -->
+
+  <div class="intro-screen">
+
+    <div class="seal">
+      💌
+    </div>
+
+    <p class="opening-text">
+      El ultimo regalo está a punto de abrirse para mi princesita bella...
+    </p>
+
+  </div>
+
+  <!-- Música principal -->
+
+  <audio id="bgMusic" loop>
+    <source src="music/song5.mp3" type="audio/mp3">
+  </audio>
+
+  <div class="music-player">
+    <button class="music-btn" onclick="toggleMusic()">🎻</button>
+  </div>
+
+  <!-- Contenido -->
+
+  <div class="container">
+
+    <div class="letter-card">
+
+      <p class="top-text">
+        EL ULTIMO REGALO
+      </p>
+
+      <h1>
+        El Regalo de Mi Princesita
+      </h1>
+
+      <div class="gold-line"></div>
+
+      <p class="opening-phrase">
+        “Este último regalo espero te guste y como los anteriores te lo doy con todo mi amor”
+      </p>
+
+      <!-- Foto -->
+
+      <div class="photo-frame">
+        <img src="img/regalo5.jpg" alt="">
+      </div>
+
+      <!-- Música -->
+
+      <div class="music-section">
+
+        <h2 class="music-title">
+          Nuestra melodía ✨
+        </h2>
+
+        <div class="music-box">
+
+          <audio controls>
+            <source src="music/song5.mp3" type="audio/mp3">
+          </audio>
+
+        </div>
+
+      </div>
+
+      <!-- Carta -->
+
+      <div class="letter">
+
+        Mi princesita bella...<br><br>
+
+        Llegó finalmente el día más importante de todos,
+        el día en que nació la niña más hermosa que mis ojos han podido admirar.<br><br>
+
+        Honestamente no sé cómo explicarte todo lo que significas para mí,
+        porque eres demasiado especial para resumirte en simples palabras.<br><br>
+
+        Tú te convertiste en mi felicidad,
+        en mi lugar seguro,
+        en mi pensamiento favorito,
+        en la persona que logra hacer feliz a mi corazón incluso en los días más difíciles.<br><br>
+
+        Amo tus ojitos,
+        amo tu sonrisa,
+        amo tu forma de ser,
+        amo cada pequeño detalle que te hace ser tú.<br><br>
+
+        Y si algún día dudas de cuánto te amo,
+        quiero que vuelvas aquí y recuerdes esto:<br><br>
+
+        eres una de las cosas más bonitas que me han pasado en toda mi vida.<br><br>
+
+        Gracias por existir,
+        gracias por permitirme amarte,
+        gracias por hacerme sentir tantas cosas hermosas,
+        gracias por amarme.<br><br>
+
+        Espero haber hecho este cumpleaños uno muy especial y que esté lleno de felicidad,
+        amor,
+        sonrisas,
+        abrazos,
+        y momentos hermosos,
+        porque nadie merece más felicidad que tú, mi vida.<br><br>
+
+        Feliz cumpleaños, mi bebita hermosa.<br><br>
+
+        Te amo muchísimo. 💌
+
+        <div class="signature">
+          Siempre tuyo ✨
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- Navegación -->
+
+    <div class="nav">
+
+      <a href="regalos.html" class="nav-btn">
+        Volver a regalos 🎁
+      </a>
+
+      <a href="carta.html" class="nav-btn">
+        Abrir carta final 💌
+      </a>
+
+    </div>
+
+  </div>
+
+  <script>
+
+    // Música
+
+    const music = document.getElementById('bgMusic');
+
+    let playing = false;
+
+    function toggleMusic(){
+
+      if(!playing){
+
+        music.play();
+        playing = true;
+
+      }else{
+
+        music.pause();
+        playing = false;
+
+      }
+
+    }
+
+    // Partículas doradas
+
+    function createSpark(){
+
+      const spark = document.createElement('div');
+
+      spark.classList.add('spark');
+
+      spark.style.left = Math.random() * window.innerWidth + 'px';
+
+      spark.style.top = '-10px';
+
+      spark.style.animationDuration = (10 + Math.random() * 10) + 's';
+
+      spark.style.opacity = Math.random();
+
+      document.body.appendChild(spark);
+
+      setTimeout(() => {
+        spark.remove();
+      },20000);
+
+    }
+
+    setInterval(createSpark, 600);
+
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Feliz Cumpleaños Princesita Bella</title>
+
+  <!-- Tipografías -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Great+Vibes&display=swap" rel="stylesheet">
+
+  <style>
+
+/* Árbol izquierdo */
+
+.tree-left{
+
+  position:fixed;
+
+  left:0;
+  bottom:0;
+
+  height:110vh;
+  width:auto;
+
+  z-index:-1;
+
+  opacity:0.95;
+
+  pointer-events:none;
+
+}
+
+/* Árbol derecho */
+
+.tree-right{
+
+  position:fixed;
+
+  right:0;
+  bottom:0;
+
+  height:110vh;
+  width:auto;
+
+  z-index:-1;
+
+  opacity:0.95;
+
+  pointer-events:none;
+
+}
+
+/* Responsive celular */
+
+@media(max-width:768px){
+
+  .tree-left,
+  .tree-right{
+
+    height:75vh;
+
+    opacity:0.75;
+
+  }
+
+}
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+    }
+
+    body{
+      background:
+      linear-gradient(rgba(255,248,240,0.75), rgba(255,248,240,0.85)),
+      url('https://images.unsplash.com/photo-1515377905703-c4788e51af15?q=80&w=1200&auto=format&fit=crop');
+
+      background-size:cover;
+      background-position:center;
+      background-attachment:fixed;
+
+      color:#5a4636;
+      min-height:100vh;
+      overflow-x:hidden;
+      font-family:'Cormorant Garamond', serif;
+      position:relative;
+    }
+
+    /* Overlay elegante */
+
+    .overlay{
+      position:fixed;
+      inset:0;
+      background:rgba(255,255,255,0.12);
+      z-index:-1;
+      backdrop-filter:blur(2px);
+    }
+
+    /* Pétalos */
+
+    .petal{
+      position:fixed;
+      top:-20px;
+      width:18px;
+      height:18px;
+      background:#ffb6c1;
+      border-radius:70% 0 70% 0;
+      box-shadow:0 0 10px rgba(255,182,193,0.7);
+      animation:fall linear infinite;
+      z-index:0;
+    }
+
+    @keyframes fall{
+      to{
+        transform:translateY(110vh) rotate(360deg);
+      }
+    }
+
+    /* Intro */
+
+    .intro{
+      width:100%;
+      min-height:100vh;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      padding:30px;
+      position:relative;
+      z-index:2;
+    }
+
+    .card{
+      width:100%;
+      max-width:700px;
+      background:rgba(255,250,245,0.82);
+      border:1px solid rgba(212,175,55,0.35);
+      border-radius:30px;
+      padding:50px 30px;
+      text-align:center;
+      backdrop-filter:blur(10px);
+      box-shadow:
+      0 10px 40px rgba(0,0,0,0.12),
+      inset 0 0 20px rgba(255,255,255,0.3);
+
+      animation:fadeIn 2s ease;
+    }
+
+    @keyframes fadeIn{
+      from{
+        opacity:0;
+        transform:translateY(30px);
+      }
+      to{
+        opacity:1;
+        transform:translateY(0);
+      }
+    }
+
+    .seal{
+      width:90px;
+      height:90px;
+      border-radius:50%;
+      background:linear-gradient(145deg,#d4af37,#f4d77d);
+      margin:0 auto 25px;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      color:white;
+      font-size:2rem;
+      box-shadow:0 0 25px rgba(212,175,55,0.4);
+      animation:pulse 3s infinite;
+    }
+
+    @keyframes pulse{
+      0%,100%{
+        transform:scale(1);
+      }
+      50%{
+        transform:scale(1.05);
+      }
+    }
+
+    .intro-text{
+      font-size:1.2rem;
+      letter-spacing:2px;
+      color:#8a6a58;
+      margin-bottom:20px;
+    }
+
+    h1{
+      font-family:'Great Vibes', cursive;
+      font-size:4rem;
+      color:#b88b7a;
+      line-height:1.2;
+      margin-bottom:20px;
+    }
+
+    .phrase{
+      font-size:1.4rem;
+      line-height:1.6;
+      margin-bottom:40px;
+      color:#6a5545;
+    }
+
+    .countdown-title{
+      font-size:1.4rem;
+      margin-bottom:15px;
+      color:#9a6d5c;
+      letter-spacing:1px;
+    }
+
+    .countdown{
+      display:flex;
+      justify-content:center;
+      flex-wrap:wrap;
+      gap:15px;
+      margin-bottom:40px;
+    }
+
+    .time-box{
+      width:90px;
+      height:90px;
+      background:rgba(255,255,255,0.5);
+      border:1px solid rgba(212,175,55,0.4);
+      border-radius:20px;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:center;
+      box-shadow:0 5px 15px rgba(0,0,0,0.05);
+    }
+
+    .time-box span{
+      font-size:2rem;
+      font-weight:600;
+      color:#7a5a48;
+    }
+
+    .time-box small{
+      font-size:0.9rem;
+      letter-spacing:1px;
+    }
+
+    .btn-container{
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:15px;
+    }
+
+    .main-btn{
+      text-decoration:none;
+      background:linear-gradient(145deg,#d4af37,#e8c86c);
+      color:white;
+      padding:16px 35px;
+      border-radius:50px;
+      font-size:1.2rem;
+      letter-spacing:1px;
+      transition:0.4s ease;
+      box-shadow:0 8px 20px rgba(212,175,55,0.25);
+    }
+
+    .main-btn:hover{
+      transform:translateY(-3px);
+      box-shadow:0 10px 25px rgba(212,175,55,0.4);
+    }
+
+    .secondary-btn{
+      text-decoration:none;
+      color:#8f6c5b;
+      font-size:1.05rem;
+      transition:0.3s;
+    }
+
+    .secondary-btn:hover{
+      color:#b88b7a;
+    }
+
+    /* Música */
+
+    .music-player{
+      position:fixed;
+      bottom:20px;
+      right:20px;
+      z-index:20;
+    }
+
+    .music-btn{
+      border:none;
+      background:rgba(255,250,245,0.85);
+      backdrop-filter:blur(10px);
+      width:65px;
+      height:65px;
+      border-radius:50%;
+      cursor:pointer;
+      font-size:1.4rem;
+      box-shadow:0 5px 20px rgba(0,0,0,0.1);
+      transition:0.4s;
+    }
+
+    .music-btn:hover{
+      transform:scale(1.1);
+    }
+
+    /* Responsive */
+
+    @media(max-width:768px){
+
+      h1{
+        font-size:3rem;
+      }
+
+      .phrase{
+        font-size:1.15rem;
+      }
+
+      .card{
+        padding:40px 20px;
+      }
+
+      .time-box{
+        width:75px;
+        height:75px;
+      }
+
+      .time-box span{
+        font-size:1.5rem;
+      }
+
+      .main-btn{
+        width:100%;
+        max-width:280px;
+      }
+
+    }
+
+  </style>
+</head>
+<body>
+
+<!-- Árboles laterales -->
+
+<img src="img/tree-left.png" class="tree-left">
+
+<img src="img/tree-right.png" class="tree-right">
+
+  <div class="overlay"></div>
+
+  <!-- Música -->
+
+  <audio id="bgMusic" loop>
+    <source src="music/yellow.mp3" type="audio/mp3">
+  </audio>
+
+  <div class="music-player">
+    <button class="music-btn" onclick="toggleMusic()">🎻</button>
+  </div>
+
+  <!-- Intro -->
+
+  <section class="intro">
+
+    <div class="card">
+
+      <div class="seal">✧</div>
+
+      <p class="intro-text">
+        Una invitación especial para mi princesita...
+      </p>
+
+      <h1>
+        FELIZ CUMPLEAÑOS<br>
+        PRINCESITA BELLA
+      </h1>
+
+      <p class="phrase">
+        Cada segundo me acerca más a celebrar a la niña más hermosa de este mundo,
+        mi vida, mi amor, mi bebita hermosa.
+      </p>
+
+      <h2 class="countdown-title">
+        Faltan...
+      </h2>
+
+      <div class="countdown">
+
+        <div class="time-box">
+          <span id="days">00</span>
+          <small>Días</small>
+        </div>
+
+        <div class="time-box">
+          <span id="hours">00</span>
+          <small>Horas</small>
+        </div>
+
+        <div class="time-box">
+          <span id="minutes">00</span>
+          <small>Minutos</small>
+        </div>
+
+        <div class="time-box">
+          <span id="seconds">00</span>
+          <small>Segundos</small>
+        </div>
+
+      </div>
+
+      <div class="btn-container">
+
+        <a href="galeria.html" class="main-btn">
+          Entra, mi bebita bella ✨
+        </a>
+
+        <a href="regalos.html" class="secondary-btn">
+          Ver regalos secretos
+        </a>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <script>
+
+    // Countdown
+
+    const targetDate = new Date("June 3, 2026 00:00:00").getTime();
+
+    const timer = setInterval(() => {
+
+      const now = new Date().getTime();
+      const distance = targetDate - now;
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      document.getElementById("days").innerHTML = days;
+      document.getElementById("hours").innerHTML = hours;
+      document.getElementById("minutes").innerHTML = minutes;
+      document.getElementById("seconds").innerHTML = seconds;
+
+      if(distance < 0){
+        clearInterval(timer);
+      }
+
+    },1000);
+
+    // Música
+
+    const music = document.getElementById('bgMusic');
+    let playing = false;
+
+    function toggleMusic(){
+      if(!playing){
+        music.play();
+        playing = true;
+      }else{
+        music.pause();
+        playing = false;
+      }
+    }
+
+    // Pétalos
+
+    function createPetal(){
+
+      const petal = document.createElement('div');
+      petal.classList.add('petal');
+
+      petal.style.left = Math.random() * window.innerWidth + 'px';
+      petal.style.animationDuration = (8 + Math.random() * 8) + 's';
+      petal.style.opacity = 0.7 + Math.random() * 0.3;
+
+      document.body.appendChild(petal);
+
+      setTimeout(() => {
+        petal.remove();
+      },16000);
+
+    }
+
+    setInterval(createPetal, 600);
+
+    // Modo nocturno automático
+
+    const hour = new Date().getHours();
+
+    if(hour >= 7 && hour <= 18){
+      document.body.style.filter = 'brightness(1)';
+    }else{
+      document.body.style.filter = 'brightness(0.88) sepia(0.08)';
+    }
+
+  </script>
+
+</body>
+</html>

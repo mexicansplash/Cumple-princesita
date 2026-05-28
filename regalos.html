@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Regalos Secretos</title>
+
+  <!-- Tipografías -->
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Great+Vibes&display=swap" rel="stylesheet">
+
+  <style>
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+    }
+
+    body{
+
+      background:
+      linear-gradient(rgba(255,248,240,0.88), rgba(255,248,240,0.92)),
+      url('https://images.unsplash.com/photo-1519225421980-715cb0215aed?q=80&w=1200&auto=format&fit=crop');
+
+      background-size:cover;
+      background-position:center;
+      background-attachment:fixed;
+
+      font-family:'Cormorant Garamond', serif;
+      color:#5f4b3d;
+
+      overflow-x:hidden;
+      min-height:100vh;
+      position:relative;
+      padding-bottom:120px;
+
+    }
+
+    /* Overlay */
+
+    .overlay{
+      position:fixed;
+      inset:0;
+      background:rgba(255,255,255,0.12);
+      backdrop-filter:blur(2px);
+      z-index:-1;
+    }
+
+    /* Pétalos */
+
+    .petal{
+      position:fixed;
+      top:-20px;
+      width:12px;
+      height:12px;
+      background:rgba(255,182,193,0.75);
+      border-radius:70% 0 70% 0;
+      animation:fall linear infinite;
+      z-index:0;
+    }
+
+    @keyframes fall{
+      to{
+        transform:translateY(110vh) rotate(360deg);
+      }
+    }
+
+    /* Header */
+
+    header{
+      text-align:center;
+      padding:70px 20px 40px;
+      position:relative;
+      z-index:2;
+    }
+
+    .small-title{
+      letter-spacing:3px;
+      color:#9c7767;
+      margin-bottom:15px;
+      font-size:1rem;
+    }
+
+    h1{
+      font-family:'Great Vibes', cursive;
+      font-size:4rem;
+      color:#b88b7a;
+      margin-bottom:20px;
+    }
+
+    .subtitle{
+      max-width:750px;
+      margin:auto;
+      font-size:1.3rem;
+      line-height:1.7;
+      color:#6f5647;
+    }
+
+    /* Regalos */
+
+    .gifts-container{
+      width:100%;
+      max-width:1200px;
+      margin:auto;
+      padding:30px 20px;
+
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+      gap:35px;
+
+      position:relative;
+      z-index:2;
+    }
+
+    /* Caja regalo */
+
+    .gift-card{
+
+      background:rgba(255,250,245,0.88);
+
+      border-radius:30px;
+
+      padding:30px 25px;
+
+      border:1px solid rgba(212,175,55,0.25);
+
+      box-shadow:
+      0 10px 30px rgba(0,0,0,0.1),
+      inset 0 0 15px rgba(255,255,255,0.25);
+
+      text-align:center;
+
+      position:relative;
+
+      overflow:hidden;
+
+      transition:0.5s ease;
+
+    }
+
+    .gift-card:hover{
+      transform:translateY(-8px);
+    }
+
+    /* Sello */
+
+    .seal{
+
+      width:85px;
+      height:85px;
+
+      border-radius:50%;
+
+      margin:0 auto 20px;
+
+      display:flex;
+      justify-content:center;
+      align-items:center;
+
+      font-size:2rem;
+
+      background:linear-gradient(145deg,#c9a227,#f0d36f);
+
+      color:white;
+
+      box-shadow:0 0 20px rgba(212,175,55,0.35);
+
+    }
+
+    /* Título */
+
+    .gift-title{
+      font-family:'Great Vibes', cursive;
+      font-size:2.2rem;
+      color:#b17e6b;
+      margin-bottom:15px;
+    }
+
+    /* Texto */
+
+    .gift-text{
+      font-size:1.15rem;
+      line-height:1.6;
+      margin-bottom:25px;
+      color:#6b5647;
+    }
+
+    /* Timer */
+
+    .countdown{
+      margin-bottom:25px;
+    }
+
+    .countdown span{
+      display:block;
+      font-size:2rem;
+      color:#8b6655;
+      font-weight:600;
+    }
+
+    .countdown small{
+      letter-spacing:2px;
+      color:#a67c68;
+    }
+
+    /* Botón */
+
+    .gift-btn{
+
+      text-decoration:none;
+
+      display:inline-block;
+
+      padding:15px 28px;
+
+      border-radius:50px;
+
+      font-size:1.05rem;
+
+      transition:0.4s ease;
+
+      letter-spacing:1px;
+
+    }
+
+    /* Bloqueado */
+
+    .locked{
+
+      background:#c8b8ae;
+      color:white;
+      pointer-events:none;
+      opacity:0.8;
+
+    }
+
+    /* Desbloqueado */
+
+    .unlocked{
+
+      background:linear-gradient(145deg,#d4af37,#e8c86c);
+
+      color:white;
+
+      box-shadow:0 8px 20px rgba(212,175,55,0.3);
+
+      animation:glow 2s infinite;
+
+    }
+
+    .unlocked:hover{
+      transform:translateY(-3px);
+    }
+
+    @keyframes glow{
+
+      0%,100%{
+        box-shadow:0 0 15px rgba(212,175,55,0.3);
+      }
+
+      50%{
+        box-shadow:0 0 28px rgba(212,175,55,0.6);
+      }
+
+    }
+
+    /* Navegación */
+
+    .nav-container{
+
+      display:flex;
+      justify-content:center;
+      gap:20px;
+      flex-wrap:wrap;
+
+      margin-top:50px;
+
+      position:relative;
+      z-index:2;
+
+    }
+
+    .nav-btn{
+
+      text-decoration:none;
+
+      background:linear-gradient(145deg,#d4af37,#e8c86c);
+
+      color:white;
+
+      padding:15px 28px;
+
+      border-radius:50px;
+
+      font-size:1.1rem;
+
+      transition:0.4s ease;
+
+      box-shadow:0 8px 20px rgba(212,175,55,0.25);
+
+    }
+
+    .nav-btn:hover{
+      transform:translateY(-3px);
+    }
+
+    /* Música */
+
+    .music-player{
+      position:fixed;
+      bottom:20px;
+      right:20px;
+      z-index:20;
+    }
+
+    .music-btn{
+
+      border:none;
+
+      width:65px;
+      height:65px;
+
+      border-radius:50%;
+
+      cursor:pointer;
+
+      font-size:1.4rem;
+
+      background:rgba(255,250,245,0.88);
+
+      backdrop-filter:blur(10px);
+
+      box-shadow:0 5px 20px rgba(0,0,0,0.1);
+
+      transition:0.4s;
+
+    }
+
+    .music-btn:hover{
+      transform:scale(1.1);
+    }
+
+    /* Responsive */
+
+    @media(max-width:768px){
+
+      h1{
+        font-size:3rem;
+      }
+
+      .subtitle{
+        font-size:1.1rem;
+      }
+
+      .gift-title{
+        font-size:2rem;
+      }
+
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="overlay"></div>
+
+  <!-- Música -->
+
+  <audio id="bgMusic" loop>
+    <source src="music/song1.mp3" type="audio/mp3">
+  </audio>
+
+  <div class="music-player">
+    <button class="music-btn" onclick="toggleMusic()">🎻</button>
+  </div>
+
+  <!-- Header -->
+
+  <header>
+
+    <p class="small-title">
+      REGALOS SECRETOS PARA MI PRINCESITA
+    </p>
+
+    <h1>
+      Salón de Regalos
+    </h1>
+
+    <p class="subtitle">
+      Cada uno de estos pequeños regalos guarda un pedacito de mi corazón,
+      esperando el momento perfecto para llegar a ti, mi amor.
+    </p>
+
+  </header>
+
+  <!-- Regalos -->
+
+  <section class="gifts-container">
+
+    <!-- REGALO 1 -->
+
+    <div class="gift-card">
+
+      <div class="seal">✧</div>
+
+      <h2 class="gift-title">
+        Una pequeña sorpresa
+      </h2>
+
+      <p class="gift-text">
+        Un pequeño detalle para comenzar esta hermosa semana especial contigo,
+        mi bebita hermosa.
+      </p>
+
+      <div class="countdown">
+        <span id="timer1">Cargando...</span>
+        <small>Disponible muy pronto</small>
+      </div>
+
+      <a href="regalo1.html" id="btn1" class="gift-btn locked">
+        Aún sellado ✨
+      </a>
+
+    </div>
+
+    <!-- REGALO 2 -->
+
+    <div class="gift-card">
+
+      <div class="seal">❀</div>
+
+      <h2 class="gift-title">
+        Un recuerdo para mi amor
+      </h2>
+
+      <p class="gift-text">
+        Porque cada recuerdo contigo se convierte en uno de mis favoritos,
+        princesita bella.
+      </p>
+
+      <div class="countdown">
+        <span id="timer2">Cargando...</span>
+        <small>Disponible muy pronto</small>
+      </div>
+
+      <a href="regalo2.html" id="btn2" class="gift-btn locked">
+        Aún sellado ✨
+      </a>
+
+    </div>
+
+    <!-- REGALO 3 -->
+
+    <div class="gift-card">
+
+      <div class="seal">♡</div>
+
+      <h2 class="gift-title">
+        Un pedacito de mi corazón
+      </h2>
+
+      <p class="gift-text">
+        Algo especial guardado únicamente para la niña más hermosa
+        de este mundo.
+      </p>
+
+      <div class="countdown">
+        <span id="timer3">Cargando...</span>
+        <small>Disponible muy pronto</small>
+      </div>
+
+      <a href="regalo3.html" id="btn3" class="gift-btn locked">
+        Aún sellado ✨
+      </a>
+
+    </div>
+
+    <!-- REGALO 4 -->
+
+    <div class="gift-card">
+
+      <div class="seal">✿</div>
+
+      <h2 class="gift-title">
+        Algo especial para ti
+      </h2>
+
+      <p class="gift-text">
+        Un regalo hecho con muchísimo amor para la dueña
+        de mi corazón.
+      </p>
+
+      <div class="countdown">
+        <span id="timer4">Cargando...</span>
+        <small>Disponible muy pronto</small>
+      </div>
+
+      <a href="regalo4.html" id="btn4" class="gift-btn locked">
+        Aún sellado ✨
+      </a>
+
+    </div>
+
+    <!-- REGALO 5 -->
+
+    <div class="gift-card">
+
+      <div class="seal">💌</div>
+
+      <h2 class="gift-title">
+        El regalo de mi princesita
+      </h2>
+
+      <p class="gift-text">
+        El regalo más especial de todos...
+        reservado únicamente para el cumpleaños de mi vida entera.
+      </p>
+
+      <div class="countdown">
+        <span id="timer5">Cargando...</span>
+        <small>Disponible muy pronto</small>
+      </div>
+
+      <a href="regalo5.html" id="btn5" class="gift-btn locked">
+        Aún sellado ✨
+      </a>
+
+    </div>
+
+  </section>
+
+  <!-- Navegación -->
+
+  <div class="nav-container">
+
+    <a href="galeria.html" class="nav-btn">
+      Volver a galería 🌸
+    </a>
+
+    <a href="carta.html" class="nav-btn">
+      Carta final 💌
+    </a>
+
+  </div>
+
+  <script>
+
+    // Música
+
+    const music = document.getElementById('bgMusic');
+
+    let playing = false;
+
+    function toggleMusic(){
+
+      if(!playing){
+
+        music.play();
+        playing = true;
+
+      }else{
+
+        music.pause();
+        playing = false;
+
+      }
+
+    }
+
+    // Pétalos
+
+    function createPetal(){
+
+      const petal = document.createElement('div');
+
+      petal.classList.add('petal');
+
+      petal.style.left = Math.random() * window.innerWidth + 'px';
+
+      petal.style.animationDuration = (8 + Math.random() * 8) + 's';
+
+      petal.style.opacity = Math.random();
+
+      document.body.appendChild(petal);
+
+      setTimeout(() => {
+        petal.remove();
+      },16000);
+
+    }
+
+    setInterval(createPetal, 2000);
+
+    // Fechas regalos
+
+    const gifts = [
+
+      {
+        timer:"timer1",
+        button:"btn1",
+        date:"May 30, 2026 00:00:00"
+      },
+
+      {
+        timer:"timer2",
+        button:"btn2",
+        date:"May 31, 2026 00:00:00"
+      },
+
+      {
+        timer:"timer3",
+        button:"btn3",
+        date:"June 1, 2026 00:00:00"
+      },
+
+      {
+        timer:"timer4",
+        button:"btn4",
+        date:"June 2, 2026 00:00:00"
+      },
+
+      {
+        timer:"timer5",
+        button:"btn5",
+        date:"June 3, 2026 00:00:00"
+      }
+
+    ];
+
+    gifts.forEach(gift => {
+
+      const countDownDate = new Date(gift.date).getTime();
+
+      const x = setInterval(() => {
+
+        const now = new Date().getTime();
+
+        const distance = countDownDate - now;
+
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        document.getElementById(gift.timer).innerHTML =
+        `${days}d ${hours}h ${minutes}m ${seconds}s`;
+
+        if(distance < 0){
+
+          clearInterval(x);
+
+          document.getElementById(gift.timer).innerHTML =
+          "Ya disponible ✨";
+
+          const btn = document.getElementById(gift.button);
+
+          btn.classList.remove("locked");
+
+          btn.classList.add("unlocked");
+
+          btn.innerHTML = "Abrir regalo 💌";
+
+        }
+
+      },1000);
+
+    });
+
+    // Modo nocturno automático
+
+    const hour = new Date().getHours();
+
+    if(hour >= 7 && hour <= 18){
+
+      document.body.style.filter = 'brightness(1)';
+
+    }else{
+
+      document.body.style.filter = 'brightness(0.88) sepia(0.08)';
+
+    }
+
+  </script>
+
+</body>
+</html>

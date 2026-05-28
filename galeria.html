@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Galería de Mi Princesita</title>
+
+  <!-- Tipografías -->
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Great+Vibes&display=swap" rel="stylesheet">
+
+  <style>
+
+/* Árbol izquierdo */
+
+.tree-left{
+
+  position:fixed;
+
+  left:0;
+  bottom:0;
+
+  height:210vh;
+  width:auto;
+
+  z-index:-1;
+
+  opacity:0.95;
+
+  pointer-events:none;
+
+}
+
+/* Árbol derecho */
+
+.tree-right{
+
+  position:fixed;
+
+  right:0;
+  bottom:0;
+
+  height:210vh;
+  width:auto;
+
+  z-index:-1;
+
+  opacity:0.95;
+
+  pointer-events:none;
+
+}
+
+/* Responsive celular */
+
+@media(max-width:768px){
+
+  .tree-left,
+  .tree-right{
+
+    height:75vh;
+
+    opacity:0.75;
+
+  }
+
+}
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+    }
+
+    body{
+      background:
+      linear-gradient(rgba(255,248,240,0.85), rgba(255,248,240,0.92)),
+      url('https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=1200&auto=format&fit=crop');
+
+      background-size:cover;
+      background-position:center;
+      background-attachment:fixed;
+
+      font-family:'Cormorant Garamond', serif;
+      color:#5f4b3d;
+
+      overflow-x:hidden;
+      min-height:100vh;
+      position:relative;
+      padding-bottom:100px;
+    }
+
+    /* Overlay */
+
+    .overlay{
+      position:fixed;
+      inset:0;
+      background:rgba(255,255,255,0.15);
+      backdrop-filter:blur(2px);
+      z-index:-1;
+    }
+
+    /* Pétalos */
+
+    .petal{
+      position:fixed;
+      top:-20px;
+      width:18px;
+      height:18px;
+      background:#ffb6c1;
+      border-radius:70% 0 70% 0;
+      box-shadow:0 0 10px rgba(255,182,193,0.7);
+      animation:fall linear infinite;
+      z-index:0;
+    }
+
+    @keyframes fall{
+      to{
+        transform:translateY(110vh) rotate(360deg);
+      }
+    }
+
+    /* Header */
+
+    header{
+      text-align:center;
+      padding:60px 20px 30px;
+      position:relative;
+      z-index:2;
+    }
+
+    .small-title{
+      letter-spacing:3px;
+      color:#9c7767;
+      margin-bottom:15px;
+      font-size:1rem;
+    }
+
+    h1{
+      font-family:'Great Vibes', cursive;
+      font-size:4rem;
+      color:#b88b7a;
+      margin-bottom:20px;
+    }
+
+    .subtitle{
+      max-width:700px;
+      margin:auto;
+      font-size:1.3rem;
+      line-height:1.7;
+      color:#6f5647;
+    }
+
+    /* Scrapbook */
+
+    .gallery-container{
+      width:100%;
+      max-width:1200px;
+      margin:auto;
+      padding:40px 20px;
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+      gap:40px;
+      position:relative;
+      z-index:2;
+    }
+
+    /* Card */
+
+    .memory-card{
+      background:rgba(255,250,245,0.88);
+      border-radius:25px;
+      padding:18px;
+      box-shadow:
+      0 10px 30px rgba(0,0,0,0.1),
+      inset 0 0 15px rgba(255,255,255,0.3);
+
+      border:1px solid rgba(212,175,55,0.25);
+
+      transform:rotate(-1deg);
+      transition:0.5s ease;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .memory-card:nth-child(even){
+      transform:rotate(1deg);
+    }
+
+    .memory-card:hover{
+      transform:translateY(-8px) scale(1.02);
+    }
+
+    /* Foto */
+
+    .photo-frame{
+      width:100%;
+      height:350px;
+      border-radius:20px;
+      overflow:hidden;
+      border:8px solid rgba(255,255,255,0.8);
+      box-shadow:0 5px 20px rgba(0,0,0,0.08);
+      margin-bottom:20px;
+    }
+
+    .photo-frame img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      transition:0.5s ease;
+    }
+
+    .memory-card:hover img{
+      transform:scale(1.05);
+    }
+
+    /* Nota */
+
+    .note{
+      background:rgba(255,245,230,0.7);
+      padding:18px;
+      border-radius:18px;
+      border-left:4px solid #d4af37;
+      position:relative;
+    }
+
+    .note-title{
+      font-family:'Great Vibes', cursive;
+      font-size:2rem;
+      color:#a77b67;
+      margin-bottom:10px;
+    }
+
+    .note-text{
+      font-size:1.1rem;
+      line-height:1.6;
+      color:#6d5646;
+    }
+
+    /* Separador elegante */
+
+    .divider{
+      width:120px;
+      height:2px;
+      background:linear-gradient(to right, transparent, #d4af37, transparent);
+      margin:60px auto;
+    }
+
+    /* Navegación */
+
+    .nav-container{
+      display:flex;
+      justify-content:center;
+      gap:20px;
+      flex-wrap:wrap;
+      padding:20px;
+      position:relative;
+      z-index:3;
+    }
+
+    .nav-btn{
+      text-decoration:none;
+      background:linear-gradient(145deg,#d4af37,#e8c86c);
+      color:white;
+      padding:15px 28px;
+      border-radius:50px;
+      font-size:1.1rem;
+      transition:0.4s ease;
+      box-shadow:0 8px 20px rgba(212,175,55,0.25);
+    }
+
+    .nav-btn:hover{
+      transform:translateY(-3px);
+      box-shadow:0 10px 25px rgba(212,175,55,0.35);
+    }
+
+    /* Música */
+
+    .music-player{
+      position:fixed;
+      bottom:20px;
+      right:20px;
+      z-index:20;
+    }
+
+    .music-btn{
+      border:none;
+      width:65px;
+      height:65px;
+      border-radius:50%;
+      cursor:pointer;
+      font-size:1.4rem;
+
+      background:rgba(255,250,245,0.85);
+      backdrop-filter:blur(10px);
+
+      box-shadow:0 5px 20px rgba(0,0,0,0.1);
+
+      transition:0.4s;
+    }
+
+    .music-btn:hover{
+      transform:scale(1.1);
+    }
+
+    /* Responsive */
+
+    @media(max-width:768px){
+
+      h1{
+        font-size:3rem;
+      }
+
+      .subtitle{
+        font-size:1.1rem;
+      }
+
+      .photo-frame{
+        height:300px;
+      }
+
+      .gallery-container{
+        gap:30px;
+      }
+
+      .note-title{
+        font-size:1.8rem;
+      }
+
+    }
+
+  </style>
+</head>
+<body>
+
+<!-- Árboles laterales -->
+
+<img src="img/tree-left.png" class="tree-left">
+
+<img src="img/tree-right.png" class="tree-right">
+
+  <div class="overlay"></div>
+
+  <!-- Música -->
+
+  <audio id="bgMusic" loop>
+    <source src="music/song1.mp3" type="audio/mp3">
+  </audio>
+
+  <div class="music-player">
+    <button class="music-btn" onclick="toggleMusic()">🎻</button>
+  </div>
+
+  <!-- Header -->
+
+  <header>
+
+    <p class="small-title">
+      RECUERDOS DE NOSOTROS
+    </p>
+
+    <h1>
+      Mi Princesita Bella
+    </h1>
+
+    <p class="subtitle">
+      Cada fotografía guarda un pedacito de mi corazón,
+      cada recuerdo contigo se convirtió en uno de mis lugares favoritos
+      en este mundo, mi amor.
+    </p>
+
+  </header>
+
+  <div class="divider"></div>
+
+  <!-- Galería -->
+
+  <section class="gallery-container">
+
+    <!-- FOTO 1 -->
+
+    <div class="memory-card">
+
+      <div class="photo-frame">
+        <img src="img/foto1.jpeg" alt="">
+      </div>
+
+      <div class="note">
+
+        <h2 class="note-title">
+          Nuestro inicio ✨
+        </h2>
+
+        <p class="note-text">
+          Aún recuerdo lo feliz que me sentí al comenzar a compartir mi vida contigo,
+          mi bebita hermosa.
+        </p>
+
+      </div>
+
+    </div>
+
+    <!-- FOTO 2 -->
+
+    <div class="memory-card">
+
+      <div class="photo-frame">
+        <img src="img/foto2.jpeg" alt="">
+      </div>
+
+      <div class="note">
+
+        <h2 class="note-title">
+          Tu sonrisa 🌸
+        </h2>
+
+        <p class="note-text">
+          Hay algo en tu sonrisa que convierte cualquier día normal
+          en el momento más bonito de mi vida.
+        </p>
+
+      </div>
+
+    </div>
+
+    <!-- FOTO 3 -->
+
+    <div class="memory-card">
+
+      <div class="photo-frame">
+        <img src="img/foto3.jpeg" alt="">
+      </div>
+
+      <div class="note">
+
+        <h2 class="note-title">
+          Mi lugar seguro 💌
+        </h2>
+
+        <p class="note-text">
+          Contigo encontré tranquilidad, amor y la sensación
+          de estar exactamente donde quiero estar.
+        </p>
+
+      </div>
+
+    </div>
+
+    <!-- FOTO 4 -->
+
+    <div class="memory-card">
+
+      <div class="photo-frame">
+        <img src="img/foto4.jpeg" alt="">
+      </div>
+
+      <div class="note">
+
+        <h2 class="note-title">
+          Tus ojitos ✨
+        </h2>
+
+        <p class="note-text">
+          Podría pasar horas mirando tus ojitos y aún sentir
+          que nunca terminaría de admirarte, mi vida.
+        </p>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- Navegación -->
+
+  <div class="nav-container">
+
+    <a href="index.html" class="nav-btn">
+      Volver al inicio
+    </a>
+
+    <a href="regalos.html" class="nav-btn">
+      Ver regalos secretos 🎁
+    </a>
+
+  </div>
+
+  <script>
+
+    // Música
+
+    const music = document.getElementById('bgMusic');
+    let playing = false;
+
+    function toggleMusic(){
+
+      if(!playing){
+        music.play();
+        playing = true;
+      }else{
+        music.pause();
+        playing = false;
+      }
+
+    }
+
+    // Pétalos
+
+    function createPetal(){
+
+      const petal = document.createElement('div');
+
+      petal.classList.add('petal');
+
+     petal.style.left = Math.random() * window.innerWidth + 'px';
+
+      petal.style.animationDuration = (8 + Math.random() * 8) + 's';
+
+      petal.style.opacity = Math.random();
+
+      document.body.appendChild(petal);
+
+      setTimeout(() => {
+        petal.remove();
+      },16000);
+
+    }
+
+    setInterval(createPetal, 700);
+
+    // Modo nocturno automático
+
+    const hour = new Date().getHours();
+
+    if(hour >= 7 && hour <= 18){
+      document.body.style.filter = 'brightness(1)';
+    }else{
+      document.body.style.filter = 'brightness(0.88) sepia(0.08)';
+    }
+
+  </script>
+
+</body>
+</html>
