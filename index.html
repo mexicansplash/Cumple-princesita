@@ -33,6 +33,9 @@
       overflow-x:hidden;
       font-family:'Cormorant Garamond', serif;
       position:relative;
+      body{
+  transition:opacity 0.5s ease;
+}
     }
 
     /* Overlay elegante */
@@ -406,17 +409,55 @@
     // Música
 
     const music = document.getElementById('bgMusic');
-    let playing = false;
 
-    function toggleMusic(){
-      if(!playing){
-        music.play();
-        playing = true;
-      }else{
-        music.pause();
-        playing = false;
-      }
-    }
+music.volume = 0.7;
+
+/* Recuperar estado */
+
+window.addEventListener('load', () => {
+
+  const savedTime = localStorage.getItem('musicTime');
+  const isPlaying = localStorage.getItem('musicPlaying');
+
+  if(savedTime){
+    music.currentTime = savedTime;
+  }
+
+  if(isPlaying === 'true'){
+
+    music.play();
+
+  }
+
+});
+
+/* Guardar tiempo constantemente */
+
+setInterval(() => {
+
+  localStorage.setItem('musicTime', music.currentTime);
+
+},1000);
+
+/* Botón */
+
+function toggleMusic(){
+
+  if(music.paused){
+
+    music.play();
+
+    localStorage.setItem('musicPlaying', 'true');
+
+  }else{
+
+    music.pause();
+
+    localStorage.setItem('musicPlaying', 'false');
+
+  }
+
+}
 
     // Pétalos
 

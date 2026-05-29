@@ -37,6 +37,9 @@
       min-height:100vh;
       position:relative;
       padding-bottom:100px;
+      body{
+  transition:opacity 0.5s ease;
+}
     }
 
     /* Overlay */
@@ -282,12 +285,16 @@
 </head>
 <body>
 
+body{
+  transition:opacity 0.5s ease;
+}
+
   <div class="overlay"></div>
 
   <!-- Música -->
 
   <audio id="bgMusic" loop>
-    <source src="music/song1.mp3" type="audio/mp3">
+    <source src="music/yellow.mp3" type="audio/mp3">
   </audio>
 
   <div class="music-player">
@@ -435,19 +442,55 @@
     // Música
 
     const music = document.getElementById('bgMusic');
-    let playing = false;
 
-    function toggleMusic(){
+music.volume = 0.7;
 
-      if(!playing){
-        music.play();
-        playing = true;
-      }else{
-        music.pause();
-        playing = false;
-      }
+/* Recuperar estado */
 
-    }
+window.addEventListener('load', () => {
+
+  const savedTime = localStorage.getItem('musicTime');
+  const isPlaying = localStorage.getItem('musicPlaying');
+
+  if(savedTime){
+    music.currentTime = savedTime;
+  }
+
+  if(isPlaying === 'true'){
+
+    music.play();
+
+  }
+
+});
+
+/* Guardar tiempo constantemente */
+
+setInterval(() => {
+
+  localStorage.setItem('musicTime', music.currentTime);
+
+},1000);
+
+/* Botón */
+
+function toggleMusic(){
+
+  if(music.paused){
+
+    music.play();
+
+    localStorage.setItem('musicPlaying', 'true');
+
+  }else{
+
+    music.pause();
+
+    localStorage.setItem('musicPlaying', 'false');
+
+  }
+
+}
 
     // Pétalos
 

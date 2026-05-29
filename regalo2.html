@@ -38,6 +38,9 @@
       min-height:100vh;
       position:relative;
       padding:40px 20px 100px;
+      body{
+  transition:opacity 0.5s ease;
+}
 
     }
 
@@ -446,7 +449,7 @@
   <!-- Música -->
 
   <audio id="bgMusic" loop>
-    <source src="music/song1.mp3" type="audio/mp3">
+    <source src="music/yellow.mp3" type="audio/mp3">
   </audio>
 
   <div class="music-player">
@@ -506,10 +509,6 @@
         Volver a regalos 🎁
       </a>
 
-      <a href="regalo2.html" class="nav-btn">
-        Siguiente sorpresa ✨
-      </a>
-
     </div>
 
   </div>
@@ -520,23 +519,54 @@
 
     const music = document.getElementById('bgMusic');
 
-    let playing = false;
+music.volume = 0.7;
 
-    function toggleMusic(){
+/* Recuperar estado */
 
-      if(!playing){
+window.addEventListener('load', () => {
 
-        music.play();
-        playing = true;
+  const savedTime = localStorage.getItem('musicTime');
+  const isPlaying = localStorage.getItem('musicPlaying');
 
-      }else{
+  if(savedTime){
+    music.currentTime = savedTime;
+  }
 
-        music.pause();
-        playing = false;
+  if(isPlaying === 'true'){
 
-      }
+    music.play();
 
-    }
+  }
+
+});
+
+/* Guardar tiempo constantemente */
+
+setInterval(() => {
+
+  localStorage.setItem('musicTime', music.currentTime);
+
+},1000);
+
+/* Botón */
+
+function toggleMusic(){
+
+  if(music.paused){
+
+    music.play();
+
+    localStorage.setItem('musicPlaying', 'true');
+
+  }else{
+
+    music.pause();
+
+    localStorage.setItem('musicPlaying', 'false');
+
+  }
+
+}
 
     // Pétalos
 

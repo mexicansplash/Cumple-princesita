@@ -38,6 +38,9 @@
       min-height:100vh;
       position:relative;
       padding-bottom:120px;
+      body{
+  transition:opacity 0.5s ease;
+}
 
     }
 
@@ -372,7 +375,7 @@
   <!-- Música -->
 
   <audio id="bgMusic" loop>
-    <source src="music/song1.mp3" type="audio/mp3">
+    <source src="music/yellow.mp3" type="audio/mp3">
   </audio>
 
   <div class="music-player">
@@ -435,11 +438,11 @@
       <div class="seal">❀</div>
 
       <h2 class="gift-title">
-        Un recuerdo para mi amor
+        Lo mas hermoso que mis ojos han visto
       </h2>
 
       <p class="gift-text">
-        Porque cada recuerdo contigo se convierte en uno de mis favoritos,
+        Para que siempre veas lo hermosa, preciosa, divina y bella que te veo,
         princesita bella.
       </p>
 
@@ -461,12 +464,11 @@
       <div class="seal">♡</div>
 
       <h2 class="gift-title">
-        Un pedacito de mi corazón
+        Un regalito pequeño pero con gran significado
       </h2>
 
       <p class="gift-text">
-        Algo especial guardado únicamente para la niña más hermosa
-        de este mundo.
+        Para siempre tener a Dios en nuestra relacion como hasta ahora lo ha estado.
       </p>
 
       <div class="countdown">
@@ -487,12 +489,11 @@
       <div class="seal">✿</div>
 
       <h2 class="gift-title">
-        Algo especial para ti
+        Algo para mi princesita
       </h2>
 
       <p class="gift-text">
-        Un regalo hecho con muchísimo amor para la dueña
-        de mi corazón.
+        Porque tu eres una princesa hermosa, preciosa y bella.
       </p>
 
       <div class="countdown">
@@ -517,8 +518,7 @@
       </h2>
 
       <p class="gift-text">
-        El regalo más especial de todos...
-        reservado únicamente para el cumpleaños de mi vida entera.
+        Un regalo para la cumpleañera mas hermosa del universo, para que lo luscas en todo lugar.
       </p>
 
       <div class="countdown">
@@ -554,23 +554,54 @@
 
     const music = document.getElementById('bgMusic');
 
-    let playing = false;
+music.volume = 0.7;
 
-    function toggleMusic(){
+/* Recuperar estado */
 
-      if(!playing){
+window.addEventListener('load', () => {
 
-        music.play();
-        playing = true;
+  const savedTime = localStorage.getItem('musicTime');
+  const isPlaying = localStorage.getItem('musicPlaying');
 
-      }else{
+  if(savedTime){
+    music.currentTime = savedTime;
+  }
 
-        music.pause();
-        playing = false;
+  if(isPlaying === 'true'){
 
-      }
+    music.play();
 
-    }
+  }
+
+});
+
+/* Guardar tiempo constantemente */
+
+setInterval(() => {
+
+  localStorage.setItem('musicTime', music.currentTime);
+
+},1000);
+
+/* Botón */
+
+function toggleMusic(){
+
+  if(music.paused){
+
+    music.play();
+
+    localStorage.setItem('musicPlaying', 'true');
+
+  }else{
+
+    music.pause();
+
+    localStorage.setItem('musicPlaying', 'false');
+
+  }
+
+}
 
     // Pétalos
 
