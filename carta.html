@@ -569,6 +569,53 @@
         font-size:2.3rem;
       }
 
+/* Botón volver */
+
+.back-home{
+
+  width:100%;
+
+  display:flex;
+
+  justify-content:center;
+
+  margin-top:60px;
+
+}
+
+.home-btn{
+
+  text-decoration:none;
+
+  background:
+  linear-gradient(145deg,#d4af37,#e8c86c);
+
+  color:white;
+
+  padding:16px 38px;
+
+  border-radius:50px;
+
+  font-size:1.15rem;
+
+  letter-spacing:1px;
+
+  transition:0.4s ease;
+
+  box-shadow:
+  0 8px 20px rgba(212,175,55,0.25);
+
+}
+
+.home-btn:hover{
+
+  transform:translateY(-3px);
+
+  box-shadow:
+  0 10px 25px rgba(212,175,55,0.4);
+
+}
+
     }
 
   </style>
@@ -874,6 +921,14 @@ function toggleMusic(){
       }
 
     },1000);
+
+<div class="back-home">
+
+  <a href="index.html" class="home-btn">
+    Volver al inicio ✨
+  </a>
+
+</div>
 
   </script>
 
